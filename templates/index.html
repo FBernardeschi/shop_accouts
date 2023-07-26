@@ -1,0 +1,43 @@
+{% include 'base.html' %}
+
+{% block content %}
+
+{% include 'header.html' %}
+
+<section class="main">
+    <div class="wrapper">
+        <div class="main-bg"></div>
+        <div class="content">
+            <div class="news">
+                <h4><span>Новости</span></h4>
+                <div class="block-news">
+                    {% for i in news %}
+                    <div class="new">
+                        <time data-time="{{ i['date_time_sec'] }}" data-format="%j% %ms%%y%, %h%:%i%">{{ i['date_time'] }}</time>
+                        <p class="news-text">{{ i['news_text'] }}</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="accounts">
+                <h4><span>Игры</span></h4>
+                <div class="block-type-accs">
+                    {% for i in games %}
+                    <a href="games.php?game={{ i['translit_name_games'] }}" class="card-acc">
+                        <div class="bg-card">
+                            <p>{{ i['name_games'] }}</p>
+                        </div>
+                        <div class="img-acc" style="background-image: url(upload/{{ i['name_photo'] }});">
+
+                        </div>
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+{% endblock %}

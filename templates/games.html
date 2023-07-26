@@ -1,0 +1,40 @@
+{% include 'base.html' %}
+
+{% include 'header.html' %}
+
+{% block content %}
+
+<section class="main">
+    <div class="wrapper">
+        <div class="main-bg"></div>
+        <div class="content-games">
+            <div class="block-game">
+                <h4><span>Игра</span></h4>
+                <div class="box-game">
+                    <img src="upload/{{ photo }}" alt="{{ translit_name_games }}">
+                    <p class="title-game">{{ name }}</p>
+                </div>
+                <a class="ref" href="index.php">Все игры</a>
+            </div>
+            <div class="block-accounts">
+                <h4><span>Аккаунты</span></h4>
+                <div class="box-account">
+                    <div class="acc-title">
+                        <span>Аккаунт</span>
+                        <span class="about">Описание</span>
+                        <span>Цена</span>
+                    </div>
+                    {% for i in accounts %}
+                    <div class="iter-acc">
+                        <span>{{ i['name_acc'] }}</span>
+                        <span class="about">{{ i['about'] }}</span>
+                        <span>{{ i['price'] }}</span>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>                
+
+{% endblock %}

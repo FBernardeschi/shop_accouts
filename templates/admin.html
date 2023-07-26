@@ -1,0 +1,144 @@
+{% include 'base.html' %}
+
+{% include 'header.html' %}
+
+{% block content %}
+
+<section class="admin">
+    <div class="wrapper">
+        <div class="admin-bg"></div>
+            <div class="block-setting">
+                <div class="games">
+                    <form action="admin.php" method="POST" enctype="multipart/form-data">
+                        <h4><span>Добавить игру</span></h4>
+                        <div class="block-input">
+                            <div class="input-box">
+                                <input type="text" name="name_game" required>
+                                <label>Название игры</label>
+                            </div>
+                            <div class="input-box">
+                                <input type="file" id="input__file" name="photo" required>
+                                <label for="input__file" class="fake-file">
+                                    <div>Выберите файл</div>
+                                </label>
+                            </div>
+                            <div class="input-box">
+                                <input type="submit" class="btn-green" value="Добавить" name="add_game">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="acc">
+                    <form action="admin.php" method="POST">
+                        <h4><span>Добавить аккаунт</span></h4>
+                        <div class="block-input">
+                            <div class="input-box">
+                                <input type="text" name="name_acc" required>
+                                <label>Название</label>
+                            </div>
+                            <div class="input-box">
+                                <input type="text" name="about" required>
+                                <label>Описание</label>
+                            </div>
+                            <div class="input-box">
+                                <input type="text" name="price" required>
+                                <label>Цена</label>
+                            </div>
+                            <div class="input-box select">
+                                <select name="acc_game">
+                                    <option value="" selected>Выберите игру</option>
+                                    {% for i in games %}
+                                    <option value="{{ i['id'] }}">{{ i['name_games'] }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="input-box">
+                                <input type="submit" class="btn-green" value="Добавить" name="add_acc">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="user">
+                    <form action="admin.php" method="POST">
+                        <h4><span>Добавить пользователя</span></h4>
+                        <div class="block-input">
+                            <div class="input-box">
+                                <input type="text" name="user" required>
+                                <label>login</label>
+                            </div>
+                            <div class="input-box">
+                                <input type="text" name="password" required>
+                                <label>Password</label>
+                            </div>
+                            <div class="input-box">
+                                <input type="submit" class="btn-green" value="Добавить" name="add_user">
+                            </div>
+                        </div>    
+                    </form>
+                </div>
+                <div class="news">
+                    <form action="admin.php" method="POST">
+                        <h4><span>Добавить новость</span></h4>
+                            <div class="block-input">
+                                <textarea name="text-news" rows="10" placeholder="Текст" required></textarea>
+                            
+                                <div class="input-box">
+                                    <input type="submit" class="btn-green" value="Добавить" name="add_news">
+                                </div>
+                            </div>    
+                    </form>
+                 </div>       
+            </div>
+
+            <!-- block delete -->
+
+            <div class="delete">
+                <form action="admin.php" method="GET">
+
+                    <div class="block-delete">
+                        <h4><span>Удалить игру</span></h4>
+
+                        <div class="block-iter">
+                            {% for i in games %}
+                            <p><span>{{ i['name_games'] }}</span> <i>—</i> <a href="admin.php?name=games&id={{ i['id'] }}" class="btn-red">Удалить</a></p>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <div class="block-delete">
+                        <h4><span>Удалить аккаунт</span></h4>
+
+                        <div class="block-iter">
+                            {% for i in accounts %}
+                            <p><span class="decoration">{{ i['name_acc']|slice(0, 25) }} <span class="decor-game">({{ games_massiv[i['account_games_id']] }})</span></span> <i>—</i> <a href="admin.php?name=account&id={{ i['id'] }}" class="btn-red">Удалить</a></p>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <div class="block-delete">
+                        <h4><span>Удалить юзера</span></h4>
+
+                        <div class="block-iter">
+                            {% for i in users %}
+                            <p><span>{{ i['u_login'] }}</span> <i>—</i> <a href="admin.php?name=users&id={{ i['id'] }}" class="btn-red">Удалить</a></p>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <div class="block-delete">
+                        <h4><span>Удалить новость</span></h4>
+
+                        <div class="block-iter">
+                            {% for i in news %}
+                            <p><span>{{ i['news_text']|slice(0, 35) }}</span> <i>—</i> <a href="admin.php?name=news&id={{ i['id'] }}" class="btn-red">Удалить</a></p>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </form>
+    </div>
+</section>
+
+{% endblock %}
